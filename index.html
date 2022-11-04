@@ -9,6 +9,55 @@
     <title>首頁</title>
 </head>
 <body>
+
+    <div id="index_app">
+        <header></header>
+        <main>
+            <ul class="card">
+                <li v-for="(spot,index) in allspot" class="card_inner">
+                    <a :href="spot.url"><img :src="spot.images[0].src" alt=""></a>
+                    <h1>{{spot.name}}</h1>
+                    <h3>{{spot.address}}</h3>
+                    <h3>{{spot.tel}}</h3>
+                    <p>{{spot.introduction}}</p> 
+                    <div><button>加入最愛</button></div>
+                </li>
+            </ul>
+
+        </main>
+
+       
+    </div>
+
+    <script>
+        new Vue({
+            el:"#index_app",
+            data:{
+                allspot: null,  //全部景點
+            },
+            methods: {
+                
+            },
+            mounted() {
+                // 全部景點資料
+                fetch("./travel_taipei.json",{
+                    method: 'GET',
+                    headers: { "Content-Type": "application/json"},
+                })  
+                .then(resp => resp.json())
+                .then((apidata) => {
+                    this.allspot = apidata.data;
+                    // console.log(this.allspot.length);
+
+                })
+                },
+
+
+        })
+
+
+
+    </script>
     
 </body>
 </html>
