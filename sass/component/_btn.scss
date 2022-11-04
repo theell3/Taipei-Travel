@@ -1,0 +1,20 @@
+// 頁碼
+.pages{
+    display: flex;
+    margin: 0 auto;
+    width: 200px;
+    justify-content: space-between;
+
+    li{
+        width: 20px;
+        height: 20px;
+        text-align: center;
+
+        &:hover{
+            color: white;
+            background-color: darkblue;
+            border-radius: 50%;
+        }
+    }
+    
+}

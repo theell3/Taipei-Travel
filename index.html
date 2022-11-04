@@ -13,8 +13,10 @@
     <div id="index_app">
         <header></header>
         <main>
+
+            <!-- 景點資料 -->
             <ul class="card">
-                <li v-for="(spot,index) in allspot" class="card_inner">
+                <li v-for="(spot,index) in spotList" class="card_inner">
                     <a :href="spot.url"><img :src="spot.images[0].src" alt=""></a>
                     <h1>{{spot.name}}</h1>
                     <h3>{{spot.address}}</h3>
@@ -23,6 +25,15 @@
                     <div><button>加入最愛</button></div>
                 </li>
             </ul>
+
+            <!-- 頁碼 -->
+            <ul class="pages">
+
+               
+                <li v-for="page in pages"  @click="toPage(page)" :class="{currentPage:whichpage === (page)}">{{page}}</li>
+                
+            </ul>
+
 
         </main>
 
@@ -33,11 +44,27 @@
         new Vue({
             el:"#index_app",
             data:{
-                allspot: null,  //全部景點
+                allspot: [],  //全部景點
+                spottype: [], //景點種類
+                pages: null, //頁碼   // 利用 this.pages = Math.ceil(this.allspot.length / 6); 取出頁碼資料
+                currentPage: 1, //分頁
+
             },
             methods: {
-                
+                toPage(i){ //判斷目前點選的頁面
+                    // console.log(i);
+                    this.currentPage = i;
+                },
+
             },
+            computed:{
+                // 單頁顯示六筆資料
+               spotList(){
+                    return this.allspot.slice((this.currentPage - 1)*6, this.currentPage * 6);
+               }
+
+            },
+
             mounted() {
                 // 全部景點資料
                 fetch("./travel_taipei.json",{
@@ -47,7 +74,9 @@
                 .then(resp => resp.json())
                 .then((apidata) => {
                     this.allspot = apidata.data;
-                    // console.log(this.allspot.length);
+                    console.log(this.allspot.length);
+                    this.pages = Math.ceil(this.allspot.length / 6);  // 30 / 6 = 5  一頁顯示六個 有五頁
+                    console.log( this.pages)
 
                 })
                 },
