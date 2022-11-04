@@ -14,25 +14,38 @@
         <header></header>
         <main>
 
-            <!-- 景點資料 -->
-            <ul class="card">
-                <li v-for="(spot,index) in spotList" class="card_inner">
-                    <a :href="spot.url"><img :src="spot.images[0].src" alt=""></a>
-                    <h1>{{spot.name}}</h1>
-                    <h3>{{spot.address}}</h3>
-                    <h3>{{spot.tel}}</h3>
-                    <p>{{spot.introduction}}</p> 
-                    <div><button>加入最愛</button></div>
-                </li>
+            <!-- 搜尋欄 -->
+            <ul class="category"> 
+                <li class="choosecategory" @click="isshow()">{{categorytitle}}</li>
+                <ol v-show="show">
+                    <li  @click="showCategoryTitle(allcategorytitle)" >{{allcategorytitle}}</li>
+                    <li v-for="category in categories" @click="showCategoryTitle(category)">{{category}}</li>
+                </ol>
             </ul>
 
-            <!-- 頁碼 -->
-            <ul class="pages">
+            <div class="info">
+                <!-- 景點資料 -->
+                <ul class="card">
+                    <li v-for="(spot,index) in spotList" class="card_inner">
+                        <a :href="spot.url"><img :src="spot.images[0].src" alt=""></a>
+                        <h1>{{spot.name}}</h1>
+                        <h3>{{spot.address}}</h3>
+                        <h3>{{spot.tel}}</h3>
+                        <p>{{spot.introduction}}</p> 
+                        <div><button>加入最愛</button></div>
+                    </li>
+                </ul>
 
-               
-                <li v-for="page in pages"  @click="toPage(page)" :class="{currentPage:whichpage === (page)}">{{page}}</li>
+                <!-- 頁碼 -->
+                <ul class="pages">
+
                 
-            </ul>
+                    <li v-for="page in pages"  @click="toPage(page)" :class="{currentPage:whichpage === (page)}">{{page}}</li>
+                    
+                </ul>
+
+            </div>
+            
 
 
         </main>
@@ -48,6 +61,10 @@
                 spottype: [], //景點種類
                 pages: null, //頁碼   // 利用 this.pages = Math.ceil(this.allspot.length / 6); 取出頁碼資料
                 currentPage: 1, //分頁
+                show:false,
+                categorytitle:"請選擇分類",
+                allcategorytitle:"全部景點",
+                categoryfilter:[], //篩選後的資料包含全部
 
             },
             methods: {
@@ -56,12 +73,64 @@
                     this.currentPage = i;
                 },
 
+                isshow(){
+                    this.show = ! this.show;
+                },
+
+                showCategoryTitle(sort){
+                    this.categoryfilter = this.allspot
+                    this.categorytitle = sort;
+                    this.show = ! this.show;
+
+                    if(sort == this.allcategorytitle){
+                        
+                      this.newallspot = this.allspot;
+                      this.pages = Math.ceil(this.newallspot.length / 6);  
+                      return this.categoryfilter = this.newallspot
+                     
+                    
+                    }else if(sort !== this.allcategorytitle){
+                        let samesort =[];
+                        let samecategory = this.allspot.filter(function(item,index){
+
+                            for(let i = 0 ; i < item.category.length; i++){    
+                                this.spottype = sort;
+                                if(item.category[i].name == this.spottype){
+                                    samesort.push(item);
+                                }
+                            }       
+                        });
+                    
+                        this.pages = Math.ceil(samesort.length / 6);
+                        return this.categoryfilter = samesort;
+                    }
+                    
+                },
+
             },
             computed:{
                 // 單頁顯示六筆資料
                spotList(){
-                    return this.allspot.slice((this.currentPage - 1)*6, this.currentPage * 6);
-               }
+                    return this.categoryfilter.slice((this.currentPage - 1)*6, this.currentPage * 6);
+               },
+                //全部景點種類
+                categories(){
+                    let allcategories = [];
+                    for(let i = 0; i < this.allspot.length ; i++){
+                        // console.log(this.allspot[i].category.length);
+                        for(let y = 0 ; y < this.allspot[i].category.length ; y++){
+                            // console.log(this.allspot[i].category[y].name);
+                            let categoryname = this.allspot[i].category[y].name
+                            allcategories.push(categoryname)
+                        } 
+                    } 
+                    // console.log(allcategories);
+
+                    let newallcategories = allcategories.filter(function (element, index, self) {
+                        return self.indexOf(element) === index;
+                    });
+                    return newallcategories;
+               },
 
             },
 
@@ -74,12 +143,12 @@
                 .then(resp => resp.json())
                 .then((apidata) => {
                     this.allspot = apidata.data;
-                    console.log(this.allspot.length);
-                    this.pages = Math.ceil(this.allspot.length / 6);  // 30 / 6 = 5  一頁顯示六個 有五頁
-                    console.log( this.pages)
+                    this.categoryfilter = this.allspot;
+                    this.pages = Math.ceil(this.categoryfilter.length / 6);  // 30 / 6 = 5  一頁顯示六個 有五頁
+                    // console.log(this.allspot);
 
                 })
-                },
+            },
 
 
         })

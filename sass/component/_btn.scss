@@ -18,3 +18,48 @@
     }
     
 }
+
+// 搜尋欄
+
+.category{
+
+    width: 160px;
+    height: 30px;
+    background-color:   #3165A5;
+    text-align: center;
+    line-height: 30px;
+    color:white;
+    // border: 1px solid #3165A5;
+        
+    .choosecategory{
+            
+
+            &:hover{
+                box-sizing: border-box;
+                background-color:rgb(189, 189, 189);
+                color: #3165A5;
+                
+            }
+    }
+    
+    ol{
+        
+        li{
+            color:#3165A5;
+            background-color:  white;
+            border-left: 1px solid #D9D9D9;
+            border-right: 1px solid #D9D9D9;
+            border-bottom: 1px solid #D9D9D9;
+
+            &:hover{
+                background-color:#3165A5;
+                color:  white;
+                border: 0;
+            }
+        }
+    }
+        
+}
+
+
+
