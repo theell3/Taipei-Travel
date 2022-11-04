@@ -14,6 +14,9 @@
         <header></header>
         <main>
 
+            <!-- 我的最愛 -->
+            <button class="myfav"><a href="fav.html">我的最愛 <span>{{allSpotDataTotal}}</span></a></button>
+
             <!-- 搜尋欄 -->
             <ul class="category"> 
                 <li class="choosecategory" @click="isshow()">{{categorytitle}}</li>
@@ -32,7 +35,7 @@
                         <h3>{{spot.address}}</h3>
                         <h3>{{spot.tel}}</h3>
                         <p>{{spot.introduction}}</p> 
-                        <div><button>加入最愛</button></div>
+                        <div><button @click="addtofav(spot.id, spot.images[0].src,spot.name, spot.address, spot.tel, spot.introduction)">加入最愛</button></div>
                     </li>
                 </ul>
 
@@ -65,6 +68,8 @@
                 categorytitle:"請選擇分類",
                 allcategorytitle:"全部景點",
                 categoryfilter:[], //篩選後的資料包含全部
+                allSpotData:[], //全部選入我的最愛的景點資料
+                allSpotDataTotal:null, //我的最愛個數
 
             },
             methods: {
@@ -107,6 +112,32 @@
                     
                 },
 
+                addtofav(id,pic,name,address,tel,intro){
+                    // console.log(id,pic, name, address, tel, intro);
+                    let spotData = {
+                        "id": id,
+                        "pic": pic,
+                        "name": name,
+                        "address": address,
+                        "tel": tel,
+                        "intro": intro,
+                    };
+
+                    let oneSpotdata = this.allSpotData.find(item => {
+                        return item.id === spotData.id
+                    });
+
+                    if(oneSpotdata){
+                        return false;
+                    }else{
+                        this.allSpotData.push(spotData);
+                    }
+
+                    localStorage.setItem("data",JSON.stringify(this.allSpotData));
+                    this.allSpotDataTotal = this.allSpotData.length;
+                    // console.log(this.allSpotDataTotal);
+                },
+
             },
             computed:{
                 // 單頁顯示六筆資料
@@ -135,6 +166,15 @@
             },
 
             mounted() {
+
+                //重新載入
+                let data =  localStorage.getItem("data");
+                if(data != null){
+                    this.allSpotData = JSON.parse(data)
+                    this.allSpotDataTotal = this.allSpotData.length;
+                }
+
+
                 // 全部景點資料
                 fetch("./travel_taipei.json",{
                     method: 'GET',
