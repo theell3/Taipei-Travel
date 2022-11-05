@@ -14,14 +14,14 @@
         <header></header>
         <main>
             <!-- 編輯我的最愛 -->
-            <div class="editinfo" >
-                <div class="editinfo_inner">
+            <div class="editinfo" v-if="showeEditplace">
+                <div class="editinfo_inner" >
                     <h3>編輯我的最愛</h3>
                     <label for="name">名稱：</label><input type="text" id="name" v-model.trim="name">
                     <label for="address">地址：</label><input type="text" id="address" v-model.trim="address">
                     <label for="tel">電話：</label><input type="text" id="tel" v-model.trim="tel">
                     <label for="intro">介紹：</label><textarea id="intro" cols="30" rows="10" v-model.trim="intro"></textarea>
-                    <button >確認</button>
+                    <button @click="savemyfav()">確認</button>
                 </div>
             </div>
 
@@ -60,6 +60,12 @@
                     allspotdata:[],
                     pages:0,
                     currentPage: 1,
+                    id: null,
+                    name: null,
+                    address: null,
+                    tel: null,
+                    intro: null,
+                    showeEditplace:false
                 },
                 methods: {
 
@@ -93,6 +99,42 @@
                         this.tel= item.tel;
                         this.intro= item.intro;
                         // console.log(this.name);
+                    },
+
+                    //確認更改我的最愛
+                    savemyfav(){
+                        // console.log(this.id);
+                        // console.log(this.name);
+                        // console.log(this.pic)
+                        let updaateMyfavData ={
+                            "id": this.id,
+                            "pic": this.pic,
+                            "name": this.name,
+                            "address": this.address,
+                            "tel": this.tel,
+                            "intro": this.intro,
+                        }
+
+                        if(updaateMyfavData.name == ""){
+                            alert("名稱不可空白");
+                        }else{
+                                for(let i = 0; i < this.allspotdata.length ; i++){
+                                if(updaateMyfavData.id == this.allspotdata[i].id){
+                                    // console.log(i);
+                                    this.allspotdata[i].name = updaateMyfavData.name;
+                                    this.allspotdata[i].address = updaateMyfavData.address;
+                                    this.allspotdata[i].tel = updaateMyfavData.tel;
+                                    this.allspotdata[i].intro = updaateMyfavData.intro;
+                                }
+                            }
+            
+                            localStorage.setItem("data",JSON.stringify(this.allspotdata));
+                            this.showeEditplace = false;
+                        }
+                        
+
+                        
+                    
                     },
 
                     toPage(i){
