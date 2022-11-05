@@ -9,6 +9,104 @@
     <title>我的最愛</title>
 </head>
 <body>
+    <div id="fav_app">
+
+        <header></header>
+        <main>
+
+             <!-- 加入我的最愛資料 -->
+            <div class="info">
+                <ul class="card">
+                    <li v-for="(spot,index) in myfavlist" class="card_inner">
+                        <a :href="spot.url"><img :src="spot.pic" alt=""></a>
+                        <h1>{{spot.name}}</h1>
+                        <h3>{{spot.address}}</h3>
+                        <h3>{{spot.tel}}</h3>
+                        <p>{{spot.intro}}</p> 
+                        <div><button @click="editmyfav(spot)">編輯資料</button></div>
+                        <div><button @click="removemyfav(spot.id)">移除最愛</button></div>
+                        
+                    </li>
+                </ul>
+
+                <!-- 頁碼 -->
+                <ul class="pages">
+                    
+                    <li v-for=" page in pages"  @click="toPage(page)" :class="{currentPage:currentPage === (page)}" >{{page}}</li>
+                    
+                </ul>
+
+            </div>
+
+
+        </main>
+
+        <script>
+
+            new Vue({
+                el:"#fav_app",
+                data:{
+                    allspotdata:[],
+                    pages:0,
+                    currentPage: 1,
+                },
+                methods: {
+
+                    // 刪除我的最愛
+                    removemyfav(id){
+                        this.allspotdata = this.allspotdata.filter(function(item){
+                            return item.id != id  // 得出點擊刪除的景點以外的景點
+                        });
+                        console.log(this.allspotdata)
+                        // console.log(this.allspotdata.length)
+                        
+                        if(this.allspotdata.length === 0){ //判斷為空陣列
+                            localStorage.removeItem("data"); 
+                            alert("已從我的最愛移除囉");
+                        }else{   
+                            localStorage.setItem("data",JSON.stringify(this.allspotdata));
+                            alert("已從我的最愛移除囉");
+                        }
+
+                    },
+
+                    toPage(i){
+                        this.currentPage = i;
+                    },
+
+                },
+                computed:{
+                    myfavlist(){
+                    if( this.allspotdata != null){
+                        if(this.allspotdata.length<=6){
+                            this.pages = 0
+                        }else{
+                            this.pages = Math.ceil(this.allspotdata.length / 6);
+                            return this.allspotdata.slice((this.currentPage - 1)*6, this.currentPage * 6);
+                        }
+                        // console.log(this.allspotdata);
+                        return this.allspotdata;
+                    }
+                     
+               }
+                },
+
+                mounted() {
+                    //取localstorage的data資料
+                    let data =  localStorage.getItem("data");
+                    // console.log(data);
+                    this.allspotdata = JSON.parse(data);
+                    this.pages = Math.ceil(this.allspotdata.length / 6);
+                },
+
+
+            })
+
+
+        </script>
+
+
+    </div>
     
 </body>
 </html>
