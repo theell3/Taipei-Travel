@@ -13,8 +13,19 @@
 
         <header></header>
         <main>
+            <!-- 編輯我的最愛 -->
+            <div class="editinfo" >
+                <div class="editinfo_inner">
+                    <h3>編輯我的最愛</h3>
+                    <label for="name">名稱：</label><input type="text" id="name" v-model.trim="name">
+                    <label for="address">地址：</label><input type="text" id="address" v-model.trim="address">
+                    <label for="tel">電話：</label><input type="text" id="tel" v-model.trim="tel">
+                    <label for="intro">介紹：</label><textarea id="intro" cols="30" rows="10" v-model.trim="intro"></textarea>
+                    <button >確認</button>
+                </div>
+            </div>
 
-             <!-- 加入我的最愛資料 -->
+            <!-- 加入我的最愛資料 -->
             <div class="info">
                 <ul class="card">
                     <li v-for="(spot,index) in myfavlist" class="card_inner">
@@ -32,7 +43,7 @@
                 <!-- 頁碼 -->
                 <ul class="pages">
                     
-                    <li v-for=" page in pages"  @click="toPage(page)" :class="{currentPage:currentPage === (page)}" >{{page}}</li>
+                    <li v-for=" page in pages"  @click="toPage(page)" :class="{currentPage:whichpage  === (page)}" >{{page}}</li>
                     
                 </ul>
 
@@ -68,6 +79,20 @@
                             alert("已從我的最愛移除囉");
                         }
 
+                    },
+
+                    // 編輯我的最愛
+                    editmyfav(item){
+                        // console.log(item);
+                        // console.log(item.name);
+                        this.showeEditplace = true;
+                        this.id = item.id;
+                        this.pic = item.pic
+                        this.name = item.name;
+                        this.address= item.address;
+                        this.tel= item.tel;
+                        this.intro= item.intro;
+                        // console.log(this.name);
                     },
 
                     toPage(i){

@@ -109,6 +109,30 @@ a {
   background-color: red;
 }
 
+.editinfo {
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: beige;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.editinfo .editinfo_inner {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+.editinfo .editinfo_inner input {
+  height: 30px;
+}
+.editinfo .editinfo_inner button {
+  height: 30px;
+  width: 200px;
+  margin: 0 auto;
+}
+
 .pages {
   display: flex;
   margin: 0 auto;
