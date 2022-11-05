@@ -67,6 +67,7 @@ a {
 @media screen and (max-width: 428px) {
   .card {
     grid-template-columns: repeat(auto-fill, 330px);
+    margin: 20px auto 0;
   }
 }
 
@@ -83,6 +84,7 @@ a {
   .card_inner {
     width: 330px;
     padding: 8px;
+    margin-bottom: 20px;
   }
 }
 .card_inner h1 {
@@ -156,6 +158,7 @@ a {
 @media screen and (max-width: 428px) {
   .editinfo {
     width: 360px;
+    padding-bottom: 20px;
   }
 }
 .editinfo .editTitle {
@@ -168,6 +171,7 @@ a {
 @media screen and (max-width: 428px) {
   .editinfo .editTitle {
     width: 360px;
+    margin-bottom: 20px;
   }
 }
 .editinfo .editTitle i {
@@ -199,14 +203,30 @@ a {
   font-size: 20px;
   margin-bottom: 8px;
 }
+@media screen and (max-width: 428px) {
+  .editinfo .editinfo_inner label {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+}
 .editinfo .editinfo_inner input {
   height: 30px;
   margin-bottom: 16px;
   font-size: 16px;
 }
+@media screen and (max-width: 428px) {
+  .editinfo .editinfo_inner input {
+    margin-bottom: 8px;
+  }
+}
 .editinfo .editinfo_inner textarea {
   margin-bottom: 40px;
   font-size: 16px;
+}
+@media screen and (max-width: 428px) {
+  .editinfo .editinfo_inner textarea {
+    margin-bottom: 8px;
+  }
 }
 .editinfo .editinfo_inner button {
   height: 40px;
