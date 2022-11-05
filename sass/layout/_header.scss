@@ -1,0 +1,69 @@
+.wrapper{
+    max-width: 1440px;
+    margin: 0 auto;
+   
+}
+
+
+header{
+
+    height: 80px;
+    // background-color: blue;
+    display: flex;
+    justify-content: space-between;
+
+   
+    .logo{
+        display: block;
+
+        img{
+            height: 60px;
+
+        }
+
+    }
+
+    .header_right{
+        width: 400px;
+        // background-color: red;
+        display: flex;
+        justify-content: space-between;
+    }
+
+   a{
+        font-size: 40px;
+        line-height: 80px;
+        color: #3165A5;
+        &:hover{
+            color: #d25541;
+
+        }
+   }
+
+    button{
+        background: white;
+        line-height: 60px;
+        
+
+        i{
+            color: #3165A5;
+            font-size: 40px;
+            &:hover{
+                color: #d25541;
+    
+            }
+            
+        }
+    
+        span{
+            color: #3165A5;
+            font-size: 40px;
+        }
+
+
+
+    }
+
+    
+
+}

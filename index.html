@@ -6,53 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://unpkg.com/vue@2"></script>
+    <script src="https://kit.fontawesome.com/8fd0ed157c.js" crossorigin="anonymous"></script>
     <title>首頁</title>
 </head>
 <body>
 
     <div id="index_app">
-        <header></header>
-        <main>
+        <div class="wrapper">
 
-            <!-- 我的最愛 -->
-            <button class="myfav"><a href="fav.html">我的最愛 <span>{{allSpotDataTotal}}</span></a></button>
-
-            <!-- 搜尋欄 -->
-            <ul class="category"> 
-                <li class="choosecategory" @click="isshow()">{{categorytitle}}</li>
-                <ol v-show="show">
-                    <li  @click="showCategoryTitle(allcategorytitle)" >{{allcategorytitle}}</li>
-                    <li v-for="category in categories" @click="showCategoryTitle(category)">{{category}}</li>
-                </ol>
-            </ul>
-
-            <div class="info">
-                <!-- 景點資料 -->
-                <ul class="card">
-                    <li v-for="(spot,index) in spotList" class="card_inner">
-                        <a :href="spot.url"><img :src="spot.images[0].src" alt=""></a>
-                        <h1>{{spot.name}}</h1>
-                        <h3>{{spot.address}}</h3>
-                        <h3>{{spot.tel}}</h3>
-                        <p>{{spot.introduction}}</p> 
-                        <div><button @click="addtofav(spot.id, spot.images[0].src,spot.name, spot.address, spot.tel, spot.introduction)">加入最愛</button></div>
-                    </li>
-                </ul>
-
-                <!-- 頁碼 -->
-                <ul class="pages">
-
+            <header>
+                <a href="./index.html" class="logo"><img src="./images/logo.png" alt=""></a>
                 
-                    <li v-for="page in pages"  @click="toPage(page)" :class="{currentPage:whichpage === (page)}">{{page}}</li>
-                    
+                <div class="header_right">
+                    <a href="./index.html">Taipei Spot</a>
+                    <button class="myfav"><a href="./fav.html"><i class="fa-solid fa-heart"></i> <span>{{allSpotDataTotal}}</span></a></button>
+                </div>
+                
+            </header>
+            <main>
+    
+                <!-- 搜尋欄 -->
+               
+                <ul class="category"> 
+                    <li class="choosecategory" @click="isshow()">{{categorytitle}}</li>
+                    <ol v-if="show">
+                        <li  @click="showCategoryTitle(allcategorytitle)" >{{allcategorytitle}}</li>
+                        <li v-for="category in categories" @click="showCategoryTitle(category)">{{category}}</li>
+                    </ol>
                 </ul>
+                    
+          
+                
+                
+    
+                <div class="info">
+                    
 
-            </div>
-            
+
+                    <!-- 景點資料 -->
+                    <ul class="card">
+                        <li v-for="(spot,index) in spotList" class="card_inner">
+                            <a :href="spot.url"><img :src="spot.images[0].src" alt=""></a>
+                            <h1>{{spot.name}}</h1>
+                            <h3>{{spot.address}}</h3>
+                            <h3>{{spot.tel}}</h3>
+                            <p>{{spot.introduction}}</p> 
+                            <div><button @click="addtofav(spot.id, spot.images[0].src,spot.name, spot.address, spot.tel, spot.introduction)">加入最愛</button></div>
+                        </li>
+                    </ul>
+    
+                    <!-- 頁碼 -->
+                    <ul class="pages">
+    
+                    
+                        <li v-for="page in pages"  @click="toPage(page)" :class="{currentPage:currentPage === (page)}">{{page}}</li>
+                        
+                    </ul>
+    
+                </div>
+                
+    
+    
+            </main>
+    
 
 
-        </main>
 
+        </div>
+        
        
     </div>
 
@@ -140,10 +161,7 @@
 
             },
             computed:{
-                // 單頁顯示六筆資料
-               spotList(){
-                    return this.categoryfilter.slice((this.currentPage - 1)*6, this.currentPage * 6);
-               },
+               
                 //全部景點種類
                 categories(){
                     let allcategories = [];
@@ -161,6 +179,11 @@
                         return self.indexOf(element) === index;
                     });
                     return newallcategories;
+               },
+
+                // 單頁顯示六筆資料
+                spotList(){
+                    return this.categoryfilter.slice((this.currentPage - 1)*6, this.currentPage * 6);
                },
 
             },
@@ -184,7 +207,9 @@
                 .then((apidata) => {
                     this.allspot = apidata.data;
                     this.categoryfilter = this.allspot;
-                    this.pages = Math.ceil(this.categoryfilter.length / 6);  // 30 / 6 = 5  一頁顯示六個 有五頁
+                    // console.log(this.categoryfilter);
+                    this.pages = Math.ceil(this.categoryfilter.length / 6);  //一頁顯示六個 
+                    
                     // console.log(this.allspot);
 
                 })
