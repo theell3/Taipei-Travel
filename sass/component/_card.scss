@@ -93,8 +93,7 @@
 // 編輯資料 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 .editPopup{
-    height: 100vh;
-    position: absolute;
+    position: fixed;
     z-index: 100;
     left: 0;
     right: 0;
@@ -173,6 +172,10 @@
             background-color: #3165A5;
             color: white;
             border-radius: 5px;
+
+            &:hover{
+                background-color: #d25541;
+            }
             
         }
     }

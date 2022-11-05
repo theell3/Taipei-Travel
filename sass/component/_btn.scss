@@ -1,8 +1,8 @@
 // 頁碼
 .pages{
-    display: grid;
-    justify-content:space-between;
-    grid-template-columns: repeat(auto-fill, 40px);
+
+    display: flex;
+    justify-content: center;
     margin: 0 auto;
     width: 200px;
 

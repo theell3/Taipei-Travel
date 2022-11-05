@@ -150,8 +150,14 @@
                         "intro": this.intro,
                     }
 
-                    if(updaateMyfavData.name == ""){
+                    if(updaateMyfavData.name == "" ){
                         alert("名稱不可空白");
+                    }else if(updaateMyfavData.address == ""){
+                        alert("地址不可空白");
+                    }else if(updaateMyfavData.tel == ""){
+                        alert("電話不可空白");
+                    }else if(updaateMyfavData.intro == ""){
+                        alert("介紹不可空白");
                     }else{
                             for(let i = 0; i < this.allspotdata.length ; i++){
                             if(updaateMyfavData.id == this.allspotdata[i].id){

@@ -124,8 +124,7 @@ a {
 }
 
 .editPopup {
-  height: 100vh;
-  position: absolute;
+  position: fixed;
   z-index: 100;
   left: 0;
   right: 0;
@@ -192,11 +191,13 @@ a {
   color: white;
   border-radius: 5px;
 }
+.editinfo .editinfo_inner button:hover {
+  background-color: #d25541;
+}
 
 .pages {
-  display: grid;
-  justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, 40px);
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
   width: 200px;
 }
