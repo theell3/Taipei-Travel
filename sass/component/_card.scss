@@ -2,26 +2,35 @@
 
 // 景點資料 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 .card{
-
     margin: 40px auto 0;
     max-width: 100%;
     display: grid;
     justify-content:space-between;
-    grid-template-columns: repeat(auto-fill, 400px);
+    grid-template-columns: repeat(auto-fill, 386px);   
 
-    
+    @include m(){
+        grid-template-columns: repeat(auto-fill, 330px);
+
+    } 
 }
 
 .card_inner{
 
     display: flex;
     flex-direction: column;
-    width: 400px;
+    
+    width: 360px;
     margin-bottom: 40px;
     padding: 10px;
     border: 3px solid #3165A5;
     border-radius:  20px;
     // background-color:  #73a6e6;
+
+    @include m(){
+        width: 330px;
+        padding: 8px;
+
+    } 
 
 
     h1{
@@ -104,14 +113,20 @@
     display: flex;
     align-items: center;
 }
+
 .editinfo{
     
     width: 600px;
     // height: 600px;
     margin: 0 auto;
     background-color: white;
-    outline: 3px solid #3165A5;
+    // border: 3px solid #3165A5;
     padding-bottom: 40px;
+
+    @include m(){
+        width: 360px;
+
+    }
   
     .editTitle{
         
@@ -120,6 +135,10 @@
         width: 600px;
         margin-bottom: 40px;
         position: relative;
+        @include m(){
+            width: 360px;
+    
+        }
 
         i{
             position: absolute;
@@ -148,6 +167,11 @@
         flex-direction: column;
         justify-content: center;
         margin: 0 auto;
+
+        @include m(){
+            width: 330px;
+    
+        }
 
         label{
             font-size: 20px;

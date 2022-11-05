@@ -1,0 +1,7 @@
+//手機板
+
+@mixin m(){
+    @media screen and (max-width: 428px) {
+        @content;    
+    }
+}

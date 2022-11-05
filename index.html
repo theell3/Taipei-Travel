@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://unpkg.com/vue@2"></script>
     <script src="https://kit.fontawesome.com/8fd0ed157c.js" crossorigin="anonymous"></script>
@@ -12,7 +13,7 @@
 <body>
 
     <div id="index_app">
-        <div class="wrapper">
+        <div class="wrapper"> 
 
             <header>
                 <a href="./index.html" class="logo"><img src="./images/logo.png" alt=""></a>
@@ -26,7 +27,6 @@
             <main>
     
                 <!-- 搜尋欄 -->
-               
                 <ul class="category"> 
                     <li class="choosecategory" @click="isshow()">{{categorytitle}}</li>
                     <ol v-if="show">
@@ -36,34 +36,27 @@
                 </ul>
                     
           
-                
-                
-    
-                <div class="info">
-                    
+                <!-- 景點資料 -->
+                <ul class="card">
+                    <li v-for="(spot,index) in spotList" class="card_inner">
+                        <a :href="spot.url"><img :src="spot.images[0].src" alt=""></a>
+                        <h1>{{spot.name}}</h1>
+                        <h3>{{spot.address}}</h3>
+                        <h3>{{spot.tel}}</h3>
+                        <p>{{spot.introduction}}</p> 
+                        <div><button @click="addtofav(spot.id, spot.images[0].src,spot.name, spot.address, spot.tel, spot.introduction)">加入最愛</button></div>
+                    </li>
+                </ul>
 
+                <!-- 頁碼 -->
+                <ul class="pages">
 
-                    <!-- 景點資料 -->
-                    <ul class="card">
-                        <li v-for="(spot,index) in spotList" class="card_inner">
-                            <a :href="spot.url"><img :src="spot.images[0].src" alt=""></a>
-                            <h1>{{spot.name}}</h1>
-                            <h3>{{spot.address}}</h3>
-                            <h3>{{spot.tel}}</h3>
-                            <p>{{spot.introduction}}</p> 
-                            <div><button @click="addtofav(spot.id, spot.images[0].src,spot.name, spot.address, spot.tel, spot.introduction)">加入最愛</button></div>
-                        </li>
-                    </ul>
-    
-                    <!-- 頁碼 -->
-                    <ul class="pages">
-    
+                
+                    <li v-for="page in pages"  @click="toPage(page)" :class="{currentPage:currentPage === (page)}">{{page}}</li>
                     
-                        <li v-for="page in pages"  @click="toPage(page)" :class="{currentPage:currentPage === (page)}">{{page}}</li>
-                        
-                    </ul>
+                </ul>
     
-                </div>
+                
                 
     
     

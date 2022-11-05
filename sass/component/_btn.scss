@@ -32,24 +32,39 @@
     line-height: 40px;
     color:white;
     // border: 1px solid #3165A5;
+
+    @include m(){
+        width: 350px;
+
+    } 
         
     .choosecategory{
         width: 240px;
         text-align: center;
+
+        @include m(){
+            width: 350px;
+    
+        }
         
 
-            &:hover{
-                box-sizing: border-box;
-                background-color:rgb(189, 189, 189);
-                color: #3165A5;
-                
-            }
+        &:hover{
+            box-sizing: border-box;
+            background-color:rgb(189, 189, 189);
+            color: #3165A5;
+            
+        }
     }
     
     ol{
         width: 240px;
         position: absolute;
         z-index: 100;
+
+        @include m(){
+            width: 350px;
+    
+        }
        
         
         li{

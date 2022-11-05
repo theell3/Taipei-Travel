@@ -62,17 +62,28 @@ a {
   max-width: 100%;
   display: grid;
   justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, 400px);
+  grid-template-columns: repeat(auto-fill, 386px);
+}
+@media screen and (max-width: 428px) {
+  .card {
+    grid-template-columns: repeat(auto-fill, 330px);
+  }
 }
 
 .card_inner {
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 360px;
   margin-bottom: 40px;
   padding: 10px;
   border: 3px solid #3165A5;
   border-radius: 20px;
+}
+@media screen and (max-width: 428px) {
+  .card_inner {
+    width: 330px;
+    padding: 8px;
+  }
 }
 .card_inner h1 {
   font-size: 24px;
@@ -140,8 +151,12 @@ a {
   width: 600px;
   margin: 0 auto;
   background-color: white;
-  outline: 3px solid #3165A5;
   padding-bottom: 40px;
+}
+@media screen and (max-width: 428px) {
+  .editinfo {
+    width: 360px;
+  }
 }
 .editinfo .editTitle {
   height: 60px;
@@ -149,6 +164,11 @@ a {
   width: 600px;
   margin-bottom: 40px;
   position: relative;
+}
+@media screen and (max-width: 428px) {
+  .editinfo .editTitle {
+    width: 360px;
+  }
 }
 .editinfo .editTitle i {
   position: absolute;
@@ -169,6 +189,11 @@ a {
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+}
+@media screen and (max-width: 428px) {
+  .editinfo .editinfo_inner {
+    width: 330px;
+  }
 }
 .editinfo .editinfo_inner label {
   font-size: 20px;
@@ -222,9 +247,19 @@ a {
   line-height: 40px;
   color: white;
 }
+@media screen and (max-width: 428px) {
+  .category {
+    width: 350px;
+  }
+}
 .category .choosecategory {
   width: 240px;
   text-align: center;
+}
+@media screen and (max-width: 428px) {
+  .category .choosecategory {
+    width: 350px;
+  }
 }
 .category .choosecategory:hover {
   box-sizing: border-box;
@@ -235,6 +270,11 @@ a {
   width: 240px;
   position: absolute;
   z-index: 100;
+}
+@media screen and (max-width: 428px) {
+  .category ol {
+    width: 350px;
+  }
 }
 .category ol li {
   color: #3165A5;
@@ -250,8 +290,17 @@ a {
 }
 
 .wrapper {
-  max-width: 1440px;
+  max-width: 1200px;
+  padding-right: 20px;
+  padding-left: 20px;
   margin: 0 auto;
+}
+@media screen and (max-width: 428px) {
+  .wrapper {
+    max-width: 350px;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 
 header {
@@ -262,21 +311,43 @@ header {
 header .logo {
   display: block;
 }
+@media screen and (max-width: 428px) {
+  header .logo {
+    display: flex;
+    align-items: center;
+  }
+}
 header .logo img {
   height: 60px;
+}
+@media screen and (max-width: 428px) {
+  header .logo img {
+    height: 30px;
+  }
 }
 header .header_right {
   width: 400px;
   display: flex;
   justify-content: space-between;
 }
+@media screen and (max-width: 428px) {
+  header .header_right {
+    width: 170px;
+  }
+}
 header a {
   font-size: 40px;
   line-height: 80px;
   color: #3165A5;
+  font-weight: bolder;
 }
 header a:hover {
   color: #d25541;
+}
+@media screen and (max-width: 428px) {
+  header a {
+    font-size: 20px;
+  }
 }
 header button {
   background: white;
@@ -289,14 +360,19 @@ header button i {
 header button i:hover {
   color: #d25541;
 }
+@media screen and (max-width: 428px) {
+  header button i {
+    font-size: 20px;
+  }
+}
 header button span {
   color: #3165A5;
   font-size: 40px;
 }
-
-main {
-  max-width: 100%;
-  margin: 40px auto;
+@media screen and (max-width: 428px) {
+  header button span {
+    font-size: 20px;
+  }
 }
 
 .pageTitle {

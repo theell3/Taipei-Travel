@@ -2,6 +2,9 @@
 @import 'base/reset';
 @import 'base/font';
 
+//mixin
+@import 'mixin/mixin';
+
 
 //component
 @import 'component/card';
@@ -13,3 +16,6 @@
 //page
 @import 'page/index';
 @import 'page/fav';
+
+
+
