@@ -101,7 +101,7 @@
 }
 
 
-// 編輯資料 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+// 編輯資料彈窗 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 .editPopup{
     position: fixed;
@@ -114,6 +114,7 @@
     background-color: rgba(0, 0, 0,0.8);
     display: flex;
     align-items: center;
+
 }
 
 .editinfo{
